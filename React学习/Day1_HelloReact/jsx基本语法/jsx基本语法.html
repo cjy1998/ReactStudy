@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>jsx语法规则</title>
+    <style type="text/css">
+      .app{
+        color:pink;
+        
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      
+    </div>
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../../js/react.development.js"> </script>
+    <!-- 引入react-dom ，用于支持react操作dom-->
+    <script type="text/javascript" src="../../js/react-dom.development.js"></script>
+    <!-- 引入babel ，用于将jsx转换为js-->
+    <script type="text/javascript" src="../../js/babel.min.js"></script>
+    <script type="text/babel">
+    const myId = 'cJy'
+    const content = 'HeLlO，jSX'
+    // 1.创建虚拟DOM
+      const VDOM = (
+        <div>
+        <h1 id={myId.toLowerCase()}  className='app'>
+        <span style={{color:'blue',fontSize:'120px'}}>{content.toLowerCase()}</span>
+        </h1>
+       
+        <h1 id={myId.toUpperCase()}  className='app'>
+        <span style={{color:'blue',fontSize:'120px'}}>{content.toLowerCase()}</span>
+        </h1>
+        
+        <input type='text'/>
+        </div>
+      )
+    // 2.渲染虚拟DOM
+      ReactDOM.render(VDOM,document.querySelector('#app'))
+      
+      /**
+       * JSX语法规则
+       * 1.定义虚拟DOM时，不要写引号
+       * 2.标签中混入js表达式时要用{}
+       *  a.一定注意区分:js表达式和js语句
+       *    表达式:一个表达式会产生一个值,可以放在任何一个需要值的地方
+       *        例: a  a+b  demo(1)函数调用表达式  array.map()  function test()
+       *    语句(代码):
+       *        例: if(){}  for(){} switch(){case:xxx}
+       * 3.样式的类名指定不要用class,要用className
+       * 4.内联样式,要用style={{key:value}}的形式去写
+       * 5.虚拟DOM只有一个根标签
+       * 6.标签必须闭合
+       * 7.标签首字符,若小写字母开头,则转为htmll中同名元素;若大写字母开头,react就去渲染对应的组件.
+       */
+    </script>
+  </body>
+</html>
