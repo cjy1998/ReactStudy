@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>类中的方法this指向</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      class Person{
+        constructor(name,age) {
+            this.name = name
+             this.age = age
+        }
+        speak(){
+          // speak方法放在了类的原型对象上，供实例使用、
+          // 通过Person实例调用study时，study中的this就是Person实例
+          console.log(this)
+        }
+      }
+      
+      const p1 = new Person()
+      p1.speak()
+      
+      const x = p1.speak()
+      x()  //undefined
+    </script>
+  </body>
+</html>

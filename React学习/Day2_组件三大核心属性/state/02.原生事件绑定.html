@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>原生事件的绑定</title>
+  </head>
+  <body>
+    <button id="a">按钮1</button>
+     <button id="b">按钮2</button>
+      <button id="c" onclick="demo()">按钮3</button>
+      <script type="text/javascript">
+        const buttonA = document.querySelector("#a")
+        buttonA.addEventListener('click',()=>{
+          console.log("按钮aa")
+        })
+        const buttonB = document.querySelector("#b")
+       buttonB.onclick = () =>{
+          console.log('按钮bb')
+        }
+        
+     function  demo (){
+          console.log('按钮c')
+        }
+      </script>
+  </body>
+</html>
