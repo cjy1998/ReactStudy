@@ -1,0 +1,54 @@
+<!--
+ * @Description: 
+ * @Version: 2.0
+ * @Autor: cjy
+ * @Date: 2022-07-15 23:09:03
+ * @LastEditors: cjy
+ * @LastEditTime: 2022-07-15 23:37:12
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../../js/react.development.js"> </script>
+    <!-- 引入react-dom ，用于支持react操作dom-->
+    <script type="text/javascript" src="../../js/react-dom.development.js"></script>
+    <!-- 引入babel ，用于将jsx转换为js-->
+    <script type="text/javascript" src="../../js/babel.min.js"></script>
+    <!-- 用于对组件标签属性进行限制 -->
+    <script type="text/javascript" src="../../js/prop-types.js"></script>
+
+    <script type="text/babel">
+        class VDOM extends React.Component{
+            showData = () =>{
+             console.log(this.input1.value)
+            }
+            saveRef = (currentNode) => {
+                this.input1 = currentNode
+            }
+            render() {
+                return (
+                    <div>
+                        {/*内联形式回调函数，页面更新时调用两次，第一次的返回值为null*/}
+                    {/*<input ref={currentNode => this.input1 = currentNode } type="text"/>*/}
+                     {/*绑定在class的回调函数，页面更新时调用一次*/}
+                    <input ref={this.saveRef} type="text"/>
+                    <button  onClick={this.showData}>点我提示左侧数据</button>
+                  
+                </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<VDOM/>,document.getElementById('app'))
+
+    </script>
+</body>
+</html>
