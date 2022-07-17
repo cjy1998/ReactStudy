@@ -2,9 +2,9 @@
  * @Description: 
  * @Version: 2.0
  * @Autor: cjy
- * @Date: 2022-07-17 15:44:52
+ * @Date: 2022-07-15 23:09:03
  * @LastEditors: cjy
- * @LastEditTime: 2022-07-17 17:27:13
+ * @LastEditTime: 2022-07-17 17:12:01
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -24,28 +24,20 @@
     <script type="text/javascript" src="../../js/babel.min.js"></script>
     <!-- 用于对组件标签属性进行限制 -->
     <script type="text/javascript" src="../../js/prop-types.js"></script>
+
     <script type="text/babel">
-            class VDOM extends React.Component{
-                state = {
-                    username: '',
-                    password: ''
-                }
-            saveUserInfo = (event) => {
-                this.setState({username:event.target.value})
-            }
-            savePasswordInfo = (event) => {
-                this.setState({password:event.target.value})
-            }
+        class VDOM extends React.Component{
             handleSubmit = (event) =>{
-                event.preventDefault() //阻止表单提交 
-                const { username,password } = this.state
-                alert(`你输入的用户名是${username}，密码是${password}`)
+                event.preventDefault() //阻止表单提交
+                
+                const { username,password } = this
+                alert(`你输入的用户名是${username.value}，密码是${password.value}`)
             }
             render() {
                 return (
                     <form onSubmit={this.handleSubmit}>
-                    用户名：<input onChange={this.saveUserInfo}  type="text" name="username"/>
-                    密码：<input  onChange={this.savePasswordInfo}  type="text" name="password"/>
+                    用户名：<input ref={c => this.username = c} type="text" name="username"/>
+                    密码：<input ref={c => this.password = c} type="text" name="password"/>
                     <button >登录</button>
                   
                 </form>
@@ -54,6 +46,7 @@
         }
 
         ReactDOM.render(<VDOM/>,document.getElementById('app'))
+
     </script>
 </body>
 </html>

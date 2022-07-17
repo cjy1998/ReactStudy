@@ -1,0 +1,52 @@
+<!--
+ * @Description: 
+ * @Version: 2.0
+ * @Autor: cjy
+ * @Date: 2022-07-17 00:10:43
+ * @LastEditors: cjy
+ * @LastEditTime: 2022-07-17 17:15:10
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  
+    <script>
+        let target = {
+            name: '张三',
+            age: 18
+        }
+        let handler = {
+            // 目标对象、需查询的属性名。
+            has(target,property){
+                console.log("has")
+                console.log(target)
+              //  return property in target  // 返回值为true
+                 // return Reflect.has(target,property) 返回值为true
+            },
+            deleteProperty: function( target,property ){
+                console.log("delete")
+                console.log(target)
+                // return delete target[property]  这样才能删除成功
+            }
+        }
+        // let proxy = new Proxy(target,Reflect)  直接使用反射API返回值为true
+        let proxy = new Proxy(target,handler)
+       
+        console.log('age' in proxy) //  原因has函数必须有返回值，
+
+        console.log(delete proxy.age) //false
+
+        console.log(proxy)  //代理对象没有删除
+
+        console.log(target) //目标对象也没有删除  证明delete没有生效  所以 'age' in proxy为false 与delete没有关系
+ 
+    </script>
+</body>
+</html>
