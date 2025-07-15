@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import UseEffect from "./hooks/UseEffect";
 
@@ -11,7 +10,7 @@ function App() {
   /* useState(init()) 只支持同步函数 */
   const [count, setCount] = useState(initData(10, 20));
   return (
-    <div>
+    <div className="h-full bg-red ">
       <h1>{count}</h1>
       {/* 
         可以直接传新的值，或者传一个函数，返回新的值，这个函数的参数是上一次的 state
