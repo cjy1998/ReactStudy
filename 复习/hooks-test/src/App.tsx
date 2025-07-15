@@ -3,6 +3,7 @@ import UseState from "@/components/reacthooks/UseState";
 import UseEffect from "@/components/reacthooks/UseEffect";
 import UseLayoutEffect from "@/components/reacthooks/UseLayoutEffect";
 import UseReducer from "./components/reacthooks/UseReducer";
+import UseMemo from "./components/reacthooks/UseMemo";
 function App() {
   return (
     <div className="w-screen h-screen flex flex-wrap gap-6 p-4">
@@ -20,6 +21,10 @@ function App() {
 
       <ShowCard title="useReducer">
         <UseReducer />
+      </ShowCard>
+
+      <ShowCard title="useMemo">
+        <UseMemo />
       </ShowCard>
     </div>
   );
