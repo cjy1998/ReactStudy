@@ -5,19 +5,21 @@ const code = `
     const cacheData = useMemo(fn,deps)
 `;
 
-const usePow = (list: string[]) => {
-  const index = Math.floor(Math.random() * list.length);
-  return list[index];
-};
+// const usePow = (list: string[]) => {
+//   const index = Math.floor(Math.random() * list.length);
+//   return list[index];
+// };
 
 const UseMemo = () => {
   const [flag, setflag] = useState(0);
-  const data = usePow(["red", "yellow", "blue"]);
 
   const colors = ["red", "yellow", "blue"];
   const index = Math.floor(Math.random() * colors.length);
   const color = useMemo(() => colors[index], []);
-
+  // const data = () => colors[index];
+  const data = (): string => {
+    return colors[index];
+  };
   return (
     <div className="flex flex-col gap-4">
       <CodeBlock code={code} language="typescript" />
@@ -37,7 +39,7 @@ const UseMemo = () => {
         </li>
       </ul>
       <h3>例子: 没有缓存，每次数字变化颜色也会变化</h3>
-      <div style={{ color: data }}>数字：{data}</div>
+      <div style={{ color: data() }}>颜色：{data()}</div>
       <button
         onClick={() =>
           setflag((val) => {
@@ -51,7 +53,7 @@ const UseMemo = () => {
         切换：{flag}
       </button>
       <h3>例子: 使用 useMemo缓存，每次数字变化颜色不会重置</h3>
-      <div style={{ color: color }}>数字：{color}</div>
+      <div style={{ color: color }}>颜色：{color}</div>
     </div>
   );
 };
