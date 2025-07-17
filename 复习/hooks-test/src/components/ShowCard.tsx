@@ -2,7 +2,7 @@ import React from "react";
 
 interface ShowCardProps {
   title: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const ShowCard = ({ title, children }: ShowCardProps) => {
