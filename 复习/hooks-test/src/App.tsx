@@ -7,6 +7,7 @@ import UseMemo from "./components/reacthooks/UseMemo";
 import UseCallback from "./components/reacthooks/UseCallback";
 import UseRef from "./components/reacthooks/UseRef";
 import ImperativeHandle from "./components/reacthooks/ImperativeHandle";
+import UseContext from "./components/reacthooks/UseContext";
 function App() {
   return (
     <div className="w-screen h-screen flex flex-wrap gap-6 p-4">
@@ -40,6 +41,10 @@ function App() {
 
       <ShowCard title="useImperativeHandle">
         <ImperativeHandle />
+      </ShowCard>
+
+      <ShowCard title="useContext">
+        <UseContext />
       </ShowCard>
     </div>
   );
