@@ -16,14 +16,13 @@ const siderStyle: React.CSSProperties = {
   textAlign: "center",
   lineHeight: "120px",
   color: "#fff",
-  backgroundColor: "#1677ff",
+  overflowY: "scroll",
 };
 
 const layoutStyle = {
-  borderRadius: 8,
   overflow: "hidden",
   width: "100%",
-  height: "100%",
+  height: "100vh",
 };
 
 const Index: React.FC = () => (

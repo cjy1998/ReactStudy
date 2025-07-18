@@ -10,7 +10,7 @@ import ImperativeHandle from "@/components/reacthooks/ImperativeHandle";
 import UseContext from "@/components/reacthooks/UseContext";
 function HooksTest() {
   return (
-    <div className="w-screen h-screen flex flex-wrap gap-6 p-4">
+    <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
       <ShowCard title="useState">
         <UseState />
       </ShowCard>
