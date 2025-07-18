@@ -1,6 +1,7 @@
 import FcType from "@/components/typePractice/FcType";
 import HooksType from "@/components/typePractice/HooksType";
 import JsxType from "@/components/typePractice/JsxType";
+import UseImperativeHandleType from "@/components/typePractice/useImperativeHandleType";
 
 const ReactType = () => {
   return (
@@ -8,6 +9,7 @@ const ReactType = () => {
       <JsxType />
       <FcType />
       <HooksType />
+      <UseImperativeHandleType />
     </div>
   );
 };
