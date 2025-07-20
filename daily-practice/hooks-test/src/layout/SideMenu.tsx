@@ -37,11 +37,11 @@ const items: MenuItem[] = [
   },
   {
     key: "sub2",
-    label: "Navigation Two",
+    label: "gsap练习",
     icon: <AppstoreOutlined />,
     children: [
-      { key: "5", label: "Option 5" },
-      { key: "6", label: "Option 6" },
+      { key: "/gsap", label: "基础练习" },
+      { key: "/gsap2", label: "进阶练习" },
       {
         key: "sub3",
         label: "Submenu",
