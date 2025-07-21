@@ -70,7 +70,7 @@ const To = () => {
         ref={boxRef}
         className="bg-green-500 rounded-md w-[200px] h-[200px]"
       ></div>
-      <div className="w-[400px]">
+      <div>
         <CodeBlock language="typescript" code={code} />
       </div>
     </div>
