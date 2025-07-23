@@ -1,4 +1,5 @@
 import Attribute from "@/components/gsap/Attribute";
+import Control from "@/components/gsap/Control";
 import Easing from "@/components/gsap/Easing";
 import MultipleTarget from "@/components/gsap/MultipleTarget";
 import Staggers from "@/components/gsap/Staggers";
@@ -14,6 +15,7 @@ const GsapTest = () => {
       <Easing />
       <Staggers />
       <Timelines />
+      <Control />
     </div>
   );
 };
