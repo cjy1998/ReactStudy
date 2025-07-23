@@ -19,19 +19,10 @@ const items: MenuItem[] = [
       {
         key: "/hooks",
         label: "Hooks练习",
-
-        // children: [
-        //   { key: "1", label: "Option 1" },
-        //   { key: "2", label: "Option 2" },
-        // ],
       },
       {
         key: "/reacttype",
         label: "React结合Ts练习",
-        // children: [
-        //   { key: "3", label: "Option 3" },
-        //   { key: "4", label: "Option 4" },
-        // ],
       },
     ],
   },
@@ -42,25 +33,14 @@ const items: MenuItem[] = [
     children: [
       { key: "/gsap", label: "基础练习" },
       { key: "/gsap2", label: "进阶练习" },
-      {
-        key: "sub3",
-        label: "Submenu",
-        children: [
-          { key: "7", label: "Option 7" },
-          { key: "8", label: "Option 8" },
-        ],
-      },
     ],
   },
   {
-    type: "divider",
-  },
-  {
     key: "sub4",
-    label: "Navigation Three",
+    label: "组件练习",
     icon: <SettingOutlined />,
     children: [
-      { key: "9", label: "Option 9" },
+      { key: "/control", label: "受控与非受控组件" },
       { key: "10", label: "Option 10" },
       { key: "11", label: "Option 11" },
       { key: "12", label: "Option 12" },

@@ -5,6 +5,7 @@ import HooksTest from "@/pages/HooksTest";
 import ReactType from "@/pages/ReactType";
 import Layout from "@/layout/Layout";
 import GsapTest from "@/pages/GsapTest";
+import ControlTest from "@/pages/ControlTest";
 
 // 为路由配置数组提供类型定义
 const routes: RouteObject[] = [
@@ -26,6 +27,10 @@ const routes: RouteObject[] = [
       {
         path: "/gsap",
         element: <GsapTest />,
+      },
+      {
+        path: "/control",
+        element: <ControlTest />,
       },
     ],
   },

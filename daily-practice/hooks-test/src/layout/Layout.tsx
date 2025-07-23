@@ -6,7 +6,6 @@ import SideMenu from "./SideMenu";
 const { Sider, Content } = Layout;
 
 const contentStyle: React.CSSProperties = {
-  textAlign: "center",
   height: "100%",
   backgroundColor: "#fff",
   overflowY: "scroll",
@@ -16,7 +15,6 @@ const siderStyle: React.CSSProperties = {
   textAlign: "center",
   lineHeight: "120px",
   color: "#fff",
-  overflowY: "scroll",
 };
 
 const layoutStyle = {
