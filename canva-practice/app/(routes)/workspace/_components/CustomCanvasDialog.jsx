@@ -18,6 +18,7 @@ import { UserDetailContext } from "@/context/UserDetailContext";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Loader2Icon } from "lucide-react";
+import { useRouter } from "next/navigation";
 const CustomCanvasDialog = ({ children }) => {
   const { userDetail } = useContext(UserDetailContext);
   const createDesignRecord = useMutation(api.designs.CreateNewDesign);
@@ -33,6 +34,7 @@ const CustomCanvasDialog = ({ children }) => {
     },
   });
   const [Loading, setLoading] = useState(false);
+  const router = useRouter();
   const CreateCustomCanvas = async (data) => {
     setLoading(true);
     toast("正在创建画布，请稍后 ...");
@@ -44,6 +46,7 @@ const CustomCanvasDialog = ({ children }) => {
       uid: userDetail?._id,
     });
     setLoading(false);
+    router.push(`/design/${res}`);
   };
   return (
     <Dialog>

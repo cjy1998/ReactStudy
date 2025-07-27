@@ -7,11 +7,13 @@ import { CanvasSizeOptions } from "@/services/Options";
 import { UserDetailContext } from "@/context/UserDetailContext";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import { useRouter } from "next/navigation";
 const IntroOptions = () => {
   const { userDetail } = useContext(UserDetailContext);
 
   const createDesignRecord = useMutation(api.designs.CreateNewDesign);
 
+  const router = useRouter();
   // 创建一个新的画布并将信息存储到数据库
   const SelectCanvasOption = async (item) => {
     toast("正在加载画布，请稍后 ...");
@@ -22,6 +24,7 @@ const IntroOptions = () => {
       height,
       uid: userDetail?._id,
     });
+    router.push(`/design/${res}`);
   };
   return (
     <div>
