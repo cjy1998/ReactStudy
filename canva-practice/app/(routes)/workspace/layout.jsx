@@ -5,7 +5,7 @@ const workspaceLayout = ({ children }) => {
   return (
     <>
       <WorkSpaceHeader />
-      <div className="flex h-screen">
+      <div className="flex h-screen w-full">
         <Siderbar />
         {children}
       </div>

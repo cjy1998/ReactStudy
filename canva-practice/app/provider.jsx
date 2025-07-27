@@ -1,7 +1,5 @@
-// import { api } from "@/convex/_generated/api";
-// "use client";
-import { UserDetailContext } from "@/context/UserDetailContext";
-import { api } from "@/convex/_generated/api";
+import { UserDetailContext } from "../context/UserDetailContext";
+import { api } from "../convex/_generated/api";
 import { useUser } from "@stackframe/stack";
 import { useMutation } from "convex/react";
 import React, { useEffect, useState } from "react";
