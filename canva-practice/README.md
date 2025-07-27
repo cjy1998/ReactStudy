@@ -16,9 +16,18 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 数据库
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Convex 是一个开源的响应式数据库，其查询是在数据库中直接运行的 TypeScript 代码。就像 React 组件对状态变化做出反应一样，Convex 查询也会对数据库变化做出反应。
+- Convex 提供了数据库、编写服务器函数的地方以及客户端库。它使构建和扩展动态实时更新应用程序变得非常简单。
+- [Convex Documentation](https://docs.convex.dev/home)
+
+## 身份验证
+
+- Stack Auth，这是一个开发人员友好的开源身份验证平台
+- 支持多种身份验证方式，如邮箱、手机号、社交媒体等
+- 提供了用户注册、登录、注销、重置密码等功能
+- [Stack Auth Documentation](https://docs.stack-auth.com/docs)
 
 ## Learn More
 
