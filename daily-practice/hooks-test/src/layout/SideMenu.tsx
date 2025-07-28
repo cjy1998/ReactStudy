@@ -47,13 +47,10 @@ const items: MenuItem[] = [
     ],
   },
   {
-    key: "grp",
-    label: "Group",
-    type: "group",
-    children: [
-      { key: "13", label: "Option 13" },
-      { key: "14", label: "Option 14" },
-    ],
+    key: "sub5",
+    label: "canvas练习",
+    icon: <SettingOutlined />,
+    children: [{ key: "/fabric", label: "fabric" }],
   },
 ];
 
