@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import React, { useRef, useState } from "react";
-
+import Calendar from "@/components/Calendar";
 const ControlTest = () => {
   //   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   //     console.log(e.target.value);
@@ -39,6 +39,14 @@ const ControlTest = () => {
           value={value}
           onChange={inputChange}
           className="border border-black rounded-md"
+        />
+      </div>
+      <div className="w-1/4 mt-10 ">
+        <Calendar
+          defaultDate={new Date("2024-05-31")}
+          onChange={(date) => {
+            console.log(date.toLocaleDateString());
+          }}
         />
       </div>
     </div>
