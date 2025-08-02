@@ -1,4 +1,16 @@
-import { Folder, Home, LayoutTemplate, WalletCards } from "lucide-react";
+import {
+  Component,
+  Folder,
+  Gpu,
+  Home,
+  Image,
+  LayoutTemplate,
+  Settings,
+  ShapesIcon,
+  Type,
+  WalletCards,
+} from "lucide-react";
+import BackrgoundSetting from "./Components/BackrgoundSetting";
 
 export const WorkspaceMenu = [
   {
@@ -65,5 +77,44 @@ export const CanvasSizeOptions = [
     icon: "/card-logo.svg",
     width: 96,
     height: 60,
+  },
+];
+
+export const sideBarMenu = [
+  {
+    name: "模板",
+    desc: "选择预设模板",
+    icon: LayoutTemplate,
+  },
+  {
+    name: "图形",
+    desc: "添加图形和贴纸",
+    icon: ShapesIcon,
+  },
+  {
+    name: "图片",
+    desc: "添加图片元素",
+    icon: Image,
+  },
+  {
+    name: "文本",
+    desc: "添加文本元素",
+    icon: Type,
+  },
+  {
+    name: "AI",
+    desc: "使用AI生成内容",
+    icon: Gpu,
+  },
+  {
+    name: "背景",
+    desc: "更换背景",
+    icon: Component,
+    component: <BackrgoundSetting />,
+  },
+  {
+    name: "设置",
+    desc: "配置设计参数",
+    icon: Settings,
   },
 ];

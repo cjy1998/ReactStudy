@@ -1,15 +1,28 @@
 "use client";
 import { useParams } from "next/navigation";
-import React from "react";
-
+import React, { useState } from "react";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import DesignHeader from "../_components/DesignHeader";
+import SideBar from "../_components/SideBar";
+import CanvasEditor from "../_components/CanvasEditor";
+import { CanvasEditorContext } from "@/context/CanvasEditor";
 const page = () => {
   const { designId } = useParams();
-  console.log(designId);
-
+  const designInfo = useQuery(api.designs.GetDesignRecord, {
+    id: designId,
+  });
+  const [canvasEditor, setCanvasEditor] = useState();
   return (
-    <div>
-      <h1>设计详情</h1>
-    </div>
+    <CanvasEditorContext value={{ canvasEditor, setCanvasEditor }}>
+      <div>
+        <DesignHeader designInfo={designInfo} />
+        <div className="flex">
+          <SideBar />
+          <CanvasEditor designInfo={designInfo} />
+        </div>
+      </div>
+    </CanvasEditorContext>
   );
 };
 
