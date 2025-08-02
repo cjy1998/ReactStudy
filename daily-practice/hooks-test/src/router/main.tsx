@@ -6,6 +6,7 @@ import ReactType from "@/pages/ReactType";
 import Layout from "@/layout/Layout";
 import GsapTest from "@/pages/GsapTest";
 import ControlTest from "@/pages/ControlTest";
+import Fabric from "@/pages/Fabric";
 
 // 为路由配置数组提供类型定义
 const routes: RouteObject[] = [
@@ -31,6 +32,10 @@ const routes: RouteObject[] = [
       {
         path: "/control",
         element: <ControlTest />,
+      },
+      {
+        path: "/fabric",
+        element: <Fabric />,
       },
     ],
   },
