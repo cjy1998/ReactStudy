@@ -11,7 +11,7 @@ import {
   WalletCards,
 } from "lucide-react";
 import BackrgoundSetting from "./Components/BackrgoundSetting";
-
+import AddImageSetting from "./Components/AddImageSetting";
 export const WorkspaceMenu = [
   {
     name: "首页",
@@ -95,6 +95,7 @@ export const sideBarMenu = [
     name: "图片",
     desc: "添加图片元素",
     icon: Image,
+    component: <AddImageSetting />,
   },
   {
     name: "文本",
