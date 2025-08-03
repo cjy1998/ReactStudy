@@ -19,9 +19,10 @@ import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Loader2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { createNewDesign } from "@/lib/actions";
 const CustomCanvasDialog = ({ children }) => {
   const { userDetail } = useContext(UserDetailContext);
-  const createDesignRecord = useMutation(api.designs.CreateNewDesign);
+  // const createDesignRecord = useMutation(api.designs.CreateNewDesign);
   const {
     register,
     handleSubmit,
@@ -39,14 +40,22 @@ const CustomCanvasDialog = ({ children }) => {
     setLoading(true);
     toast("正在创建画布，请稍后 ...");
     const { name, width, height } = data;
-    const res = await createDesignRecord({
+    // const res = await createDesignRecord({
+    //   name,
+    //   width: Number(width),
+    //   height: Number(height),
+    //   uid: userDetail?._id,
+    // });
+    console.log("创建画布成功", userDetail);
+    const res = await createNewDesign({
       name,
       width: Number(width),
       height: Number(height),
-      uid: userDetail?._id,
+      authorId: userDetail?.id,
     });
+    const designId = res?.id;
     setLoading(false);
-    router.push(`/design/${res}`);
+    router.push(`/design/${designId}`);
   };
   return (
     <Dialog>

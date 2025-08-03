@@ -1,17 +1,27 @@
 "use client";
 import { useParams } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import DesignHeader from "../_components/DesignHeader";
 import SideBar from "../_components/SideBar";
 import CanvasEditor from "../_components/CanvasEditor";
 import { CanvasEditorContext } from "@/context/CanvasEditor";
+import { getDesignById } from "@/lib/actions";
 const page = () => {
   const { designId } = useParams();
-  const designInfo = useQuery(api.designs.GetDesignRecord, {
-    id: designId,
-  });
+  // const designInfo = useQuery(api.designs.GetDesignRecord, {
+  //   id: designId,
+  // });
+  const [designInfo, setDesignInfo] = useState(null);
+  const getDesignInfo = async () => {
+    const res = await getDesignById(Number(designId));
+    setDesignInfo(res);
+  };
+  useEffect(() => {
+    getDesignInfo();
+  }, [designId]);
+  // const designInfo = await getDesignById(Number(designId));
   const [canvasEditor, setCanvasEditor] = useState();
   return (
     <CanvasEditorContext value={{ canvasEditor, setCanvasEditor }}>

@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../app/generated/prisma"
 }
 
 datasource db {
@@ -21,15 +20,21 @@ model User {
   picture        String
   subscriptionId String?
   Design         Design[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now())
+  isDeleted      Boolean  @default(false)
 }
 
 model Design {
-  id           Int     @id @default(autoincrement())
+  id           Int      @id @default(autoincrement())
   name         String
   width        Int
   height       Int
   jsonTemplate String?
   imagePreview String?
   authorId     Int
-  author       User    @relation(fields: [authorId], references: [id])
+  author       User     @relation(fields: [authorId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now())
+  isDeleted    Boolean  @default(false)
 }
