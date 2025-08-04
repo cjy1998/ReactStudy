@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { UploadCloudIcon, LoaderIcon } from "lucide-react";
 import { FabricImage } from "fabric";
 import useCanvasEditor from "@/hooks/UseCanvasHook";
-const OSS = require("ali-oss");
+import { uploadImage as uploadImageToOSS } from "@/lib/actions";
 const UploadImage = () => {
   const [loading, setLoading] = useState(false);
   const { canvasEditor } = useCanvasEditor();
@@ -14,36 +14,34 @@ const UploadImage = () => {
     privateKey: process.env.NEXT_PUBLIC_IMAGEKIT_PRIVATE_KEY,
     urlEndpoint: process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT,
   });
-  const client = new OSS({
-    // yourregion填写Bucket所在地域。以华东1（杭州）为例，Region填写为oss-cn-hangzhou。
-    region: process.env.NEXT_PUBLIC_OSS_REGION,
-    // 从环境变量中获取访问凭证。运行本代码示例之前，请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
-    accessKeyId: process.env.NEXT_PUBLIC_OSS_ACCESS_KEY_ID,
-    accessKeySecret: process.env.NEXT_PUBLIC_OSS_ACCESS_KEY_SECRET,
-    authorizationV4: true,
-    // 填写Bucket名称。
-    bucket: process.env.NEXT_PUBLIC_OSS_BUCKET,
-  });
   const onFileUpload = async (e) => {
     setLoading(true);
     const file = e.target.files[0];
-    try {
-      //   const res = client.put(file.name, file);
-      //   console.log(res);
+    console.log(e.target);
 
-      const imageRef = await imagekit.upload({
-        file,
-        fileName: file.name,
-        isPublished: true,
-      });
-      console.log(imageRef);
-      const canvasImageRef = await FabricImage.fromURL(imageRef?.url);
+    try {
+      const res = await uploadImageToOSS(file);
+      const canvasImageRef = await FabricImage.fromURL(res);
       canvasImageRef.set({
         width: 100,
         height: 100,
       });
       canvasEditor.add(canvasImageRef);
       canvasEditor.renderAll();
+      console.log(res);
+      //   const imageRef = await imagekit.upload({
+      //     file,
+      //     fileName: file.name,
+      //     isPublished: true,
+      //   });
+      //   console.log(imageRef);
+      //   const canvasImageRef = await FabricImage.fromURL(imageRef?.url);
+      //   canvasImageRef.set({
+      //     width: 100,
+      //     height: 100,
+      //   });
+      //   canvasEditor.add(canvasImageRef);
+      //   canvasEditor.renderAll();
     } catch (error) {
       console.log(error);
     } finally {

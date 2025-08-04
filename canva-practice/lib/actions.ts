@@ -1,6 +1,18 @@
 "use server";
 import prisma from "./prisma";
 import { DesignSchema, UserSchema } from "./formValidationSchemas";
+const OSS = require("ali-oss");
+import fs from "fs";
+const client = new OSS({
+  // yourregion填写Bucket所在地域。以华东1（杭州）为例，Region填写为oss-cn-hangzhou。
+  region: process.env.NEXT_PUBLIC_OSS_REGION,
+  // 从环境变量中获取访问凭证。运行本代码示例之前，请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
+  accessKeyId: process.env.NEXT_PUBLIC_OSS_ACCESS_KEY_ID,
+  accessKeySecret: process.env.NEXT_PUBLIC_OSS_ACCESS_KEY_SECRET,
+  // 填写Bucket名称。
+  bucket: process.env.NEXT_PUBLIC_OSS_BUCKET,
+  authorizationV4: true,
+});
 /**
  * 创建一个新的用户
  * @param data
@@ -66,5 +78,44 @@ export const getDesignById = async (id: number) => {
     return result;
   } catch (error) {
     // console.log(error);
+  }
+};
+/**
+ * oss 预签名
+ */
+async function generateSignatureUrl(fileName: string) {
+  return await client.signatureUrlV4(
+    "PUT",
+    3600,
+    {
+      headers: {}, // 请根据实际发送的请求头设置此处的请求头
+    },
+    fileName
+  );
+}
+
+/**
+ * 上传图片至阿里云 oss
+ */
+export const uploadImage = async (file: File) => {
+  const url = await generateSignatureUrl(file.name);
+  // console.log(url);
+
+  try {
+    // 将 File 对象转换为 Buffer
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    const result = await client.put(file.name, buffer, {
+      headers: {
+        "Content-Type": file.type || "application/octet-stream",
+      },
+    });
+    console.log(result);
+    if (result.res.status === 200) {
+      return result.url;
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
