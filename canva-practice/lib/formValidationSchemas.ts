@@ -16,3 +16,13 @@ export const designSchema = z.object({
 });
 
 export type DesignSchema = z.infer<typeof designSchema>;
+
+export const fileSchema = z.object({
+  name: z.string(),
+  url: z.string(),
+  type: z.string(),
+  size: z.number(),
+  userId: z.number().optional(),
+});
+
+export type FileSchema = z.infer<typeof fileSchema>;

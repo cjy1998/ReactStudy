@@ -1,8 +1,7 @@
 "use server";
 import prisma from "./prisma";
-import { DesignSchema, UserSchema } from "./formValidationSchemas";
+import { DesignSchema, FileSchema, UserSchema } from "./formValidationSchemas";
 const OSS = require("ali-oss");
-import fs from "fs";
 const client = new OSS({
   // yourregion填写Bucket所在地域。以华东1（杭州）为例，Region填写为oss-cn-hangzhou。
   region: process.env.NEXT_PUBLIC_OSS_REGION,
@@ -111,10 +110,31 @@ export const uploadImage = async (file: File) => {
         "Content-Type": file.type || "application/octet-stream",
       },
     });
-    console.log(result);
     if (result.res.status === 200) {
       return result.url;
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
+/**
+ * 上传文件
+ * @param data
+ * @returns
+ */
+export const uploadFile = async (data: FileSchema) => {
+  try {
+    console.log("data", data);
+    const result = await prisma.file.create({
+      data: {
+        name: data.name,
+        url: data.url,
+        type: data.type,
+        size: data.size,
+        userId: data.userId,
+      },
+    });
+    return result;
   } catch (error) {
     console.log(error);
   }

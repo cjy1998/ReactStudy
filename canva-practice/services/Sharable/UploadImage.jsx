@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ImageKit from "imagekit";
 import { Button } from "@/components/ui/button";
 import { UploadCloudIcon, LoaderIcon } from "lucide-react";
 import { FabricImage } from "fabric";
 import useCanvasEditor from "@/hooks/UseCanvasHook";
-import { uploadImage as uploadImageToOSS } from "@/lib/actions";
+import { uploadImage as uploadImageToOSS, uploadFile } from "@/lib/actions";
+import { UserDetailContext } from "@/context/UserDetailContext";
+
 const UploadImage = () => {
   const [loading, setLoading] = useState(false);
   const { canvasEditor } = useCanvasEditor();
+  const { userDetail } = useContext(UserDetailContext);
 
   var imagekit = new ImageKit({
     publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY,
@@ -17,10 +20,21 @@ const UploadImage = () => {
   const onFileUpload = async (e) => {
     setLoading(true);
     const file = e.target.files[0];
-    console.log(e.target);
+    console.log(file);
 
     try {
+      // 上传至阿里云
       const res = await uploadImageToOSS(file);
+      //   将信息保存到数据库
+      const fileInfo = await uploadFile({
+        name: file.name,
+        url: res,
+        type: file.type,
+        size: file.size,
+        userId: userDetail?.id,
+      });
+      console.log("fileInfo", fileInfo);
+
       const canvasImageRef = await FabricImage.fromURL(res);
       canvasImageRef.set({
         width: 100,
