@@ -139,3 +139,60 @@ export const uploadFile = async (data: FileSchema) => {
     console.log(error);
   }
 };
+/**
+ * 查询用户文件
+ */
+export const getUserFiles = async (userId: number) => {
+  try {
+    const result = await prisma.file.findMany({
+      where: {
+        userId,
+        isDeleted: false,
+        isOffice: false,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+/**
+ * 查询官方文件
+ */
+export const getOfficialFiles = async () => {
+  try {
+    const result = await prisma.file.findMany({
+      where: {
+        isOffice: true,
+        isDeleted: false,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+/**
+ * 删除文件
+ */
+export const deleteFile = async (id: number) => {
+  try {
+    const result = await prisma.file.update({
+      where: {
+        id,
+      },
+      data: {
+        isDeleted: true,
+      },
+    });
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};

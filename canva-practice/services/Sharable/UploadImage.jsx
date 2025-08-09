@@ -37,8 +37,8 @@ const UploadImage = () => {
 
       const canvasImageRef = await FabricImage.fromURL(res);
       canvasImageRef.set({
-        width: 100,
-        height: 100,
+        scaleX: 0.1,
+        scaleY: 0.1,
       });
       canvasEditor.add(canvasImageRef);
       canvasEditor.renderAll();
