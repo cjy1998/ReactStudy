@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import BackrgoundSetting from "./Components/BackrgoundSetting";
 import AddImageSetting from "./Components/AddImageSetting";
+import Elements from "./Components/Elements";
 export const WorkspaceMenu = [
   {
     name: "首页",
@@ -88,8 +89,9 @@ export const sideBarMenu = [
   },
   {
     name: "图形",
-    desc: "添加图形和贴纸",
+    desc: "添加图形",
     icon: ShapesIcon,
+    component: <Elements />,
   },
   {
     name: "图片",
@@ -117,5 +119,38 @@ export const sideBarMenu = [
     name: "设置",
     desc: "配置设计参数",
     icon: Settings,
+  },
+];
+
+export const ShapeList = [
+  {
+    name: "矩形",
+    value: "rect",
+    icon: "/shape/rect.svg",
+  },
+  {
+    name: "圆形",
+    value: "circle",
+    icon: "/shape/circle.svg",
+  },
+  {
+    name: "三角形",
+    value: "triangle",
+    icon: "/shape/triangle.svg",
+  },
+  {
+    name: "多边形",
+    value: "polygon",
+    icon: "/shape/polygon.svg",
+  },
+  {
+    name: "线段",
+    value: "line",
+    icon: "/shape/line.svg",
+  },
+  {
+    name: "五角星",
+    value: "star",
+    icon: "/shape/star.svg",
   },
 ];

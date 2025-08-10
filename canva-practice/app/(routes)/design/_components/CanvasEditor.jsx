@@ -12,6 +12,8 @@ const CanvasEditor = ({ designInfo }) => {
         width: designInfo?.width / 2,
         height: designInfo?.height / 2,
         backgroundColor: "#fff",
+        // 保持对象层级不变
+        preserveObjectStacking: true,
       });
       //   设置分辨率
       const scaleFactor = window.devicePixelRatio || 1;
@@ -29,6 +31,24 @@ const CanvasEditor = ({ designInfo }) => {
       };
     }
   }, [designInfo]);
+  // 删除
+  useEffect(() => {
+    const handelKeyDown = (e) => {
+      if (e.key == "Delete" || e.key == "Backspace") {
+        if (canvasEditor) {
+          const activeObject = canvasEditor.getActiveObject();
+          if (activeObject) {
+            canvasEditor.remove(activeObject);
+            canvasEditor.renderAll();
+          }
+        }
+      }
+    };
+    document.addEventListener("keydown", handelKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handelKeyDown);
+    };
+  }, [canvasEditor]);
   return (
     <div className=" w-full h-[calc(100vh-64px)] flex items-center justify-center flex-col p-2 bg-secondary">
       <canvas id="canvas" ref={canvasRef} />
