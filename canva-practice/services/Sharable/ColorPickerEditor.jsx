@@ -1,6 +1,6 @@
 import React from "react";
 import { ChromePicker, CirclePicker } from "react-color";
-const ColorPickerEditor = ({ value, onColorChange }) => {
+const ColorPickerEditor = ({ value, onColorChange, showCircle = true }) => {
   return (
     <div className="space-y-4">
       <ChromePicker
@@ -8,7 +8,9 @@ const ColorPickerEditor = ({ value, onColorChange }) => {
         onChange={(e) => onColorChange(e.hex)}
         className="border-r rounded-2xl mb-5"
       />
-      <CirclePicker color={value} onChange={(e) => onColorChange(e.hex)} />
+      {showCircle && (
+        <CirclePicker color={value} onChange={(e) => onColorChange(e.hex)} />
+      )}
     </div>
   );
 };

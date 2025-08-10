@@ -154,3 +154,35 @@ export const ShapeList = [
     icon: "/shape/star.svg",
   },
 ];
+export const shapesSettingsList = [
+  {
+    name: "填充",
+    value: "fill",
+    icon: "/shape/setting/fill.svg",
+  },
+  {
+    name: "边框宽度",
+    value: "strokeWidth",
+    icon: "/shape/setting/strokeWidth.svg",
+  },
+  {
+    name: "边框颜色",
+    value: "strokeColor",
+    icon: "/shape/setting/strokeColor.svg",
+  },
+  {
+    name: "圆角",
+    value: "radius",
+    icon: "/shape/setting/radius.svg",
+  },
+  {
+    name: "透明度",
+    value: "opacity",
+    icon: "/shape/setting/opacity.svg",
+  },
+  {
+    name: "删除",
+    value: "delete",
+    icon: "/delete.svg",
+  },
+];

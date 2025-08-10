@@ -1,6 +1,7 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas, Rect } from "fabric";
+import TopNavBar from "@/services/Components/TopNavBar";
 import useCanvasEditor from "@/hooks/UseCanvasHook";
 const CanvasEditor = ({ designInfo }) => {
   const canvasRef = useRef(null);
@@ -50,8 +51,11 @@ const CanvasEditor = ({ designInfo }) => {
     };
   }, [canvasEditor]);
   return (
-    <div className=" w-full h-[calc(100vh-64px)] flex items-center justify-center flex-col p-2 bg-secondary">
-      <canvas id="canvas" ref={canvasRef} />
+    <div className=" w-full h-[calc(100vh-64px)] bg-secondary relative">
+      <TopNavBar />
+      <div className="h-[calc(100vh-64px)] flex items-center justify-center flex-col p-2 ">
+        <canvas id="canvas" ref={canvasRef} />
+      </div>
     </div>
   );
 };
