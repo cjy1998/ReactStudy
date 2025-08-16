@@ -26,3 +26,22 @@ export const fileSchema = z.object({
 });
 
 export type FileSchema = z.infer<typeof fileSchema>;
+
+export const generateImageSchema = z.object({
+  prompt: z.string(),
+  provider: z.string(),
+  model: z.string(),
+  size: z.enum([
+    "1024x1024",
+    "auto",
+    "1536x1024",
+    "1024x1536",
+    "256x256",
+    "512x512",
+    "1792x1024",
+    "1024x1792",
+  ]),
+  response_format: z.enum(["url", "b64_json"]).default("url"),
+});
+
+export type GenerateImageSchema = z.infer<typeof generateImageSchema>;

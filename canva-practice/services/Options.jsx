@@ -13,6 +13,7 @@ import {
 import BackrgoundSetting from "./Components/BackrgoundSetting";
 import AddImageSetting from "./Components/AddImageSetting";
 import Elements from "./Components/Elements";
+import AiCreateImg from "./Components/AiCreateImg";
 import FillColor from "./Sharable/FillColor";
 import BorderColor from "./Sharable/BorderColor";
 import SliderWithOrRadius from "./Sharable/SliderWithOrRadius";
@@ -117,6 +118,7 @@ export const sideBarMenu = [
     value: "ai",
     desc: "使用AI生成内容",
     icon: Gpu,
+    component: <AiCreateImg />,
   },
   {
     name: "背景",
@@ -211,5 +213,18 @@ export const shapesSettingsList = [
         type="opacity"
       />
     ),
+  },
+];
+
+export const modelList = [
+  {
+    label: "Doubao-SeedEdit-3.0-i2i",
+    value: "doubao-seededit-3-0-i2i-250628",
+    provider: "huoshan",
+  },
+  {
+    label: "Doubao-Seedream-3.0-t2i",
+    value: "doubao-seedream-3-0-t2i-250415",
+    provider: "huoshan",
   },
 ];

@@ -1,7 +1,14 @@
 "use server";
 import prisma from "./prisma";
-import { DesignSchema, FileSchema, UserSchema } from "./formValidationSchemas";
+import {
+  DesignSchema,
+  FileSchema,
+  UserSchema,
+  GenerateImageSchema,
+} from "./formValidationSchemas";
+import OpenAI from "openai";
 const OSS = require("ali-oss");
+// 实例化oss
 const client = new OSS({
   // yourregion填写Bucket所在地域。以华东1（杭州）为例，Region填写为oss-cn-hangzhou。
   region: process.env.NEXT_PUBLIC_OSS_REGION,
@@ -12,6 +19,14 @@ const client = new OSS({
   bucket: process.env.NEXT_PUBLIC_OSS_BUCKET,
   authorizationV4: true,
 });
+// 实例化openai
+const openai = (url: string, key: string) => {
+  return new OpenAI({
+    baseURL: url,
+    apiKey: key,
+    timeout: 180000,
+  });
+};
 /**
  * 创建一个新的用户
  * @param data
@@ -194,5 +209,27 @@ export const deleteFile = async (id: number) => {
     return result;
   } catch (error) {
     console.log(error);
+  }
+};
+/**
+ * 生成图片
+ */
+const generateImage = async (data: GenerateImageSchema) => {
+  if (data.provider === "huoshan") {
+    const client = openai(
+      "https://ark.cn-beijing.volces.com/api/v3",
+      process.env.HOU_SHAN_API_KEY
+    );
+    const res = await client.images.generate({
+      model: data.model,
+      prompt: data.prompt,
+      size: data.size,
+      response_format: data.response_format,
+    });
+    const result = {
+      url: res.data[0].url,
+      usage: res.usage?.total_tokens,
+    };
+    return result;
   }
 };
