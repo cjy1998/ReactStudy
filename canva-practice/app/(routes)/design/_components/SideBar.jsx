@@ -3,11 +3,13 @@ import { sideBarMenu } from "@/services/Options";
 import React, { useState } from "react";
 import { SideBarSettings } from "../_components/SideBarSettings";
 import SideBarInfo from "../_components/SideBarInfo";
-
+import useStore from "@/lib/store";
 const SideBar = () => {
   const [selected, setSelected] = useState();
+  const activeMenu = useStore((state) => state.updateSideBarMenu);
   const hanelSelect = (item) => {
     setSelected(item);
+    activeMenu(item.value);
   };
   const [isShow, setIsShow] = useState(true);
   const changeShow = (isShow) => {

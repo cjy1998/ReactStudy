@@ -13,6 +13,10 @@ import {
 import BackrgoundSetting from "./Components/BackrgoundSetting";
 import AddImageSetting from "./Components/AddImageSetting";
 import Elements from "./Components/Elements";
+import FillColor from "./Sharable/FillColor";
+import BorderColor from "./Sharable/BorderColor";
+import SliderWithOrRadius from "./Sharable/SliderWithOrRadius";
+
 export const WorkspaceMenu = [
   {
     name: "首页",
@@ -84,39 +88,46 @@ export const CanvasSizeOptions = [
 export const sideBarMenu = [
   {
     name: "模板",
+    value: "template",
     desc: "选择预设模板",
     icon: LayoutTemplate,
   },
   {
     name: "图形",
+    value: "shape",
     desc: "添加图形",
     icon: ShapesIcon,
     component: <Elements />,
   },
   {
     name: "图片",
+    value: "image",
     desc: "添加图片元素",
     icon: Image,
     component: <AddImageSetting />,
   },
   {
     name: "文本",
+    value: "text",
     desc: "添加文本元素",
     icon: Type,
   },
   {
     name: "AI",
+    value: "ai",
     desc: "使用AI生成内容",
     icon: Gpu,
   },
   {
     name: "背景",
+    value: "background",
     desc: "更换背景",
     icon: Component,
     component: <BackrgoundSetting />,
   },
   {
     name: "设置",
+    value: "setting",
     desc: "配置设计参数",
     icon: Settings,
   },
@@ -159,30 +170,46 @@ export const shapesSettingsList = [
     name: "填充",
     value: "fill",
     icon: "/shape/setting/fill.svg",
+    component: <FillColor />,
   },
   {
     name: "边框宽度",
     value: "strokeWidth",
     icon: "/shape/setting/strokeWidth.svg",
+    component: (
+      <SliderWithOrRadius
+        defaultValue={[3]}
+        max={20}
+        step={1}
+        type="strokeWidth"
+      />
+    ),
   },
   {
     name: "边框颜色",
     value: "strokeColor",
     icon: "/shape/setting/strokeColor.svg",
+    component: <BorderColor />,
   },
   {
     name: "圆角",
     value: "radius",
     icon: "/shape/setting/radius.svg",
+    component: (
+      <SliderWithOrRadius defaultValue={[0]} max={100} step={1} type="radius" />
+    ),
   },
   {
     name: "透明度",
     value: "opacity",
     icon: "/shape/setting/opacity.svg",
-  },
-  {
-    name: "删除",
-    value: "delete",
-    icon: "/delete.svg",
+    component: (
+      <SliderWithOrRadius
+        defaultValue={[1]}
+        max={1}
+        step={0.1}
+        type="opacity"
+      />
+    ),
   },
 ];
