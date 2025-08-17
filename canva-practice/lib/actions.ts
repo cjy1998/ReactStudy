@@ -7,6 +7,7 @@ import {
   GenerateImageSchema,
 } from "./formValidationSchemas";
 import OpenAI from "openai";
+import { dataURLtoFile } from "./utils";
 const OSS = require("ali-oss");
 // 实例化oss
 const client = new OSS({
@@ -20,7 +21,7 @@ const client = new OSS({
   authorizationV4: true,
 });
 // 实例化openai
-const openai = (url: string, key: string) => {
+const openai = async (url: string, key: string) => {
   return new OpenAI({
     baseURL: url,
     apiKey: key,
@@ -108,26 +109,34 @@ async function generateSignatureUrl(fileName: string) {
   );
 }
 
-/**
- * 上传图片至阿里云 oss
- */
-export const uploadImage = async (file: File) => {
-  const url = await generateSignatureUrl(file.name);
-  // console.log(url);
-
+const uploadByBuffer = async (
+  buffer: Buffer,
+  fileName: string,
+  fileType: string
+) => {
   try {
-    // 将 File 对象转换为 Buffer
-    const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-
-    const result = await client.put(file.name, buffer, {
+    const result = await client.put(fileName, buffer, {
       headers: {
-        "Content-Type": file.type || "application/octet-stream",
+        "Content-Type": fileType || "application/octet-stream",
       },
     });
     if (result.res.status === 200) {
       return result.url;
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
+/**
+ * 上传图片至阿里云 oss
+ */
+export const uploadImage = async (file: File) => {
+  try {
+    // 将 File 对象转换为 Buffer
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    // console.log(buffer, file.name, file.type);
+    return await uploadByBuffer(buffer, file.name, file.type);
   } catch (error) {
     console.log(error);
   }
@@ -214,22 +223,27 @@ export const deleteFile = async (id: number) => {
 /**
  * 生成图片
  */
-const generateImage = async (data: GenerateImageSchema) => {
+export const generateImage = async (data: GenerateImageSchema) => {
   if (data.provider === "huoshan") {
-    const client = openai(
+    const client = await openai(
       "https://ark.cn-beijing.volces.com/api/v3",
       process.env.HOU_SHAN_API_KEY
     );
     const res = await client.images.generate({
       model: data.model,
       prompt: data.prompt,
+      //@ts-ignore
       size: data.size,
       response_format: data.response_format,
     });
-    const result = {
-      url: res.data[0].url,
-      usage: res.usage?.total_tokens,
-    };
-    return result;
+    // 转换为 File 对象
+    const file: any = await dataURLtoFile(
+      `data:image/png;base64,${res.data[0].b64_json}`,
+      `${new Date().getTime()}_canvas_ai_image.png`
+    );
+    // 上传图片至阿里云
+    const url = await uploadByBuffer(file.buffer, file.filename, file.mime);
+
+    return url;
   }
 };

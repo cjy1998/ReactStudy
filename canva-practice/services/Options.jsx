@@ -221,10 +221,12 @@ export const modelList = [
     label: "Doubao-SeedEdit-3.0-i2i",
     value: "doubao-seededit-3-0-i2i-250628",
     provider: "huoshan",
+    type: "image",
   },
   {
     label: "Doubao-Seedream-3.0-t2i",
     value: "doubao-seedream-3-0-t2i-250415",
     provider: "huoshan",
+    type: "text",
   },
 ];

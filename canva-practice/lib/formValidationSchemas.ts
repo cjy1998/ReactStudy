@@ -28,20 +28,25 @@ export const fileSchema = z.object({
 export type FileSchema = z.infer<typeof fileSchema>;
 
 export const generateImageSchema = z.object({
-  prompt: z.string(),
-  provider: z.string(),
+  prompt: z
+    .string()
+    .min(2, { message: "最少输入2个字符" })
+    .max(500, { message: "最多输入500个字符" }),
+  provider: z.string().default("huoshan"),
   model: z.string(),
-  size: z.enum([
-    "1024x1024",
-    "auto",
-    "1536x1024",
-    "1024x1536",
-    "256x256",
-    "512x512",
-    "1792x1024",
-    "1024x1792",
-  ]),
-  response_format: z.enum(["url", "b64_json"]).default("url"),
+  size: z
+    .enum([
+      "1024x1024",
+      "864x1152",
+      "1152x864",
+      "1280x720",
+      "720x1280",
+      "832x1248",
+      "1248x832",
+      "auto",
+    ])
+    .default("1024x1024"),
+  response_format: z.enum(["url", "b64_json"]).default("b64_json"),
 });
 
 export type GenerateImageSchema = z.infer<typeof generateImageSchema>;
