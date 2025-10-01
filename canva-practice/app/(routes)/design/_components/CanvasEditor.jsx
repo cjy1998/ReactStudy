@@ -35,7 +35,7 @@ const CanvasEditor = ({ designInfo }) => {
   // 删除
   useEffect(() => {
     const handelKeyDown = (e) => {
-      if (e.key == "Delete" || e.key == "Backspace") {
+      if (e.key == "Delete") {
         if (canvasEditor) {
           const activeObject = canvasEditor.getActiveObject();
           if (activeObject) {

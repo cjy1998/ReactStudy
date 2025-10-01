@@ -17,7 +17,7 @@ import AiCreateImg from "./Components/AiCreateImg";
 import FillColor from "./Sharable/FillColor";
 import BorderColor from "./Sharable/BorderColor";
 import SliderWithOrRadius from "./Sharable/SliderWithOrRadius";
-
+import TextSettings from "./Components/TextSettings";
 export const WorkspaceMenu = [
   {
     name: "首页",
@@ -112,6 +112,7 @@ export const sideBarMenu = [
     value: "text",
     desc: "添加文本元素",
     icon: Type,
+    component: <TextSettings />,
   },
   {
     name: "AI",
@@ -228,5 +229,46 @@ export const modelList = [
     value: "doubao-seedream-3-0-t2i-250415",
     provider: "huoshan",
     type: "text",
+  },
+];
+
+export const textSettingsList = [
+  {
+    name: "填充",
+    value: "fill",
+    icon: "/shape/setting/fill.svg",
+    component: <FillColor />,
+  },
+  {
+    name: "边框宽度",
+    value: "strokeWidth",
+    icon: "/shape/setting/strokeWidth.svg",
+    component: (
+      <SliderWithOrRadius
+        defaultValue={[3]}
+        max={20}
+        step={1}
+        type="strokeWidth"
+      />
+    ),
+  },
+  {
+    name: "边框颜色",
+    value: "strokeColor",
+    icon: "/shape/setting/strokeColor.svg",
+    component: <BorderColor />,
+  },
+  {
+    name: "透明度",
+    value: "opacity",
+    icon: "/shape/setting/opacity.svg",
+    component: (
+      <SliderWithOrRadius
+        defaultValue={[1]}
+        max={1}
+        step={0.1}
+        type="opacity"
+      />
+    ),
   },
 ];

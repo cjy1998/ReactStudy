@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { shapesSettingsList } from "../Options";
+import React from "react";
+import { textSettingsList } from "../Options";
 import Image from "next/image";
 
 import {
@@ -7,12 +7,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-
-const ShapesSettings = () => {
+const TextSettings = () => {
   return (
     <div>
       <div className="flex gap-4">
-        {shapesSettingsList.map((item) => (
+        {textSettingsList.map((item) => (
           <div key={item.value} className="hover:scale-105 transition-all">
             <Popover>
               <PopoverTrigger asChild>
@@ -33,4 +32,4 @@ const ShapesSettings = () => {
   );
 };
 
-export default ShapesSettings;
+export default TextSettings;
