@@ -125,3 +125,19 @@
     @apply bg-background text-foreground;
   }
 }
+@font-face {
+  font-family: "alidlt"; /* 定义的字体名称 */
+  src:
+    url("/fonts/nCjzYGmV26pa/AlimamaDaoLiTi.woff2") format("woff2"),
+    url("/fonts/nCjzYGmV26pa/AlimamaDaoLiTi.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "alifangyuan"; /* 定义的字体名称 */
+  src:
+    url("/fonts/J5TDrDLSsgzP/AlimamaFangYuanTiVF-Thin.woff2") format("woff2"),
+    url("/fonts/J5TDrDLSsgzP/AlimamaFangYuanTiVF-Thin.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}

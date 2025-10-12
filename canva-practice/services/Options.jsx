@@ -9,6 +9,7 @@ import {
   ShapesIcon,
   Type,
   WalletCards,
+  TypeOutline,
 } from "lucide-react";
 import BackrgoundSetting from "./Components/BackrgoundSetting";
 import AddImageSetting from "./Components/AddImageSetting";
@@ -18,6 +19,7 @@ import FillColor from "./Sharable/FillColor";
 import BorderColor from "./Sharable/BorderColor";
 import SliderWithOrRadius from "./Sharable/SliderWithOrRadius";
 import TextSettings from "./Components/TextSettings";
+import FontFamily from "./Sharable/FontFamily";
 export const WorkspaceMenu = [
   {
     name: "首页",
@@ -259,6 +261,12 @@ export const textSettingsList = [
     component: <BorderColor />,
   },
   {
+    name: "字体",
+    value: "fontFamily",
+    icon: "/shape/setting/font.svg",
+    component: <FontFamily />,
+  },
+  {
     name: "透明度",
     value: "opacity",
     icon: "/shape/setting/opacity.svg",
@@ -270,5 +278,32 @@ export const textSettingsList = [
         type="opacity"
       />
     ),
+  },
+];
+
+export const FontFamilyList = [
+  {
+    name: "微软雅黑",
+    value: "Microsoft YaHei",
+  },
+  {
+    name: "宋体",
+    value: "SimSun",
+  },
+  {
+    name: "黑体",
+    value: "SimHei",
+  },
+  {
+    name: "楷体",
+    value: "KaiTi",
+  },
+  {
+    name: "阿里妈妈刀隶体测试",
+    value: "alidlt",
+  },
+  {
+    name: "阿里妈妈方圆体",
+    value: "alifangyuan",
   },
 ];
