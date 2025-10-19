@@ -1,7 +1,17 @@
 import React from "react";
 import { FontFamilyList } from "../Options";
+import useCanvasEditor from "@/hooks/UseCanvasHook";
 
 const FontFamily = () => {
+  const { canvasEditor } = useCanvasEditor();
+  const onFontFamilyChange = (val) => {
+    console.log(val);
+    const activeObject = canvasEditor.getActiveObject();
+    if (activeObject) {
+      activeObject.set({ fontFamily: val });
+    }
+    canvasEditor.renderAll();
+  };
   return (
     <div className="height-[200px] overflow-y-auto">
       {FontFamilyList.map((item) => (
@@ -11,6 +21,7 @@ const FontFamily = () => {
           style={{
             fontFamily: `${item.value}, sans-serif`,
           }}
+          onClick={() => onFontFamilyChange(item.value)}
         >
           {item.name}
         </h2>
