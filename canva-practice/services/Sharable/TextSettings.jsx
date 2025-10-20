@@ -7,10 +7,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+
+import FontStyle from "./FontStyle";
+
 const TextSettings = () => {
   return (
     <div>
-      <div className="flex gap-4">
+      <div className="flex gap-4 items-center">
         {textSettingsList.map((item) => (
           <div key={item.value} className="hover:scale-105 transition-all">
             <Popover>
@@ -27,6 +30,7 @@ const TextSettings = () => {
             </Popover>
           </div>
         ))}
+        <FontStyle />
       </div>
     </div>
   );

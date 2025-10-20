@@ -5,7 +5,6 @@ import useCanvasEditor from "@/hooks/UseCanvasHook";
 const FontFamily = () => {
   const { canvasEditor } = useCanvasEditor();
   const onFontFamilyChange = (val) => {
-    console.log(val);
     const activeObject = canvasEditor.getActiveObject();
     if (activeObject) {
       activeObject.set({ fontFamily: val });
