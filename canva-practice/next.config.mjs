@@ -6,7 +6,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["cj-links.oss-cn-beijing.aliyuncs.com"],
+    domains: ["cj-links.oss-cn-beijing.aliyuncs.com", "imgbed.cj.abrdns.com"],
   },
   //   reactStrictMode: true,
   //   webpack: (config) => {

@@ -3,6 +3,9 @@ import { ShapeList } from "../Options";
 import Image from "next/image";
 import useCanvasEditor from "@/hooks/UseCanvasHook";
 import { Circle, Rect, Triangle, Line, Polygon } from "fabric";
+import { pasterList } from "../Options";
+import { FabricImage } from "fabric";
+
 const Shapes = () => {
   const { canvasEditor } = useCanvasEditor();
   // 创建五角星的点坐标
@@ -94,9 +97,19 @@ const Shapes = () => {
     }
     canvasEditor.renderAll();
   };
+  const handlePasterClick = async (item) => {
+    const canvasImageRef = await FabricImage.fromURL(item);
+    canvasImageRef.set({
+      scaleX: 0.1,
+      scaleY: 0.1,
+    });
+    canvasEditor.add(canvasImageRef);
+    canvasEditor.renderAll();
+  };
   return (
     <div>
-      <div className="grid grid-cols-3 gap-4">
+      <p className="text-md">图形</p>
+      <div className="grid grid-cols-3 gap-4 ">
         {ShapeList.map((item) => (
           <div
             key={item.name}
@@ -104,6 +117,18 @@ const Shapes = () => {
             className="p-2 cursor-pointer"
           >
             <Image src={item.icon} alt={item.name} width={80} height={80} />
+          </div>
+        ))}
+      </div>
+      <p className="text-md p-2">贴纸</p>
+      <div className="grid grid-cols-3 gap-4 max-h-[60vh] overflow-auto">
+        {pasterList.map((item, index) => (
+          <div
+            key={index}
+            onClick={() => handlePasterClick(item)}
+            className="p-2 cursor-pointer"
+          >
+            <Image src={item} alt={item} width={80} height={80} />
           </div>
         ))}
       </div>
