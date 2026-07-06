@@ -1,19 +1,19 @@
+import { faker } from "@faker-js/faker";
+import { HttpResponse, http } from "msw";
 import { UserApi } from "@/api/services/userService";
 import { ResultStatus } from "@/types/enum";
 import { convertFlatToTree } from "@/utils/tree";
-import { faker } from "@faker-js/faker";
-import { http, HttpResponse } from "msw";
 import { DB_MENU, DB_PERMISSION, DB_ROLE, DB_ROLE_PERMISSION, DB_USER, DB_USER_ROLE } from "../assets_backup";
 
 const signIn = http.post(`/api${UserApi.SignIn}`, async ({ request }) => {
-	const { username, password } = (await request.json()) as Record<string, string>;
+	const { email, password } = (await request.json()) as Record<string, string>;
 
-	const user = DB_USER.find((item) => item.username === username);
+	const user = DB_USER.find((item) => item.email === email);
 
 	if (!user || user.password !== password) {
 		return HttpResponse.json({
 			status: 10001,
-			message: "Incorrect username or password.",
+			message: "Incorrect email or password.",
 		});
 	}
 	// delete password

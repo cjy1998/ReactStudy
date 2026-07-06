@@ -66,7 +66,7 @@
 			"smsPlaceholder": "Please input sms code",
 			"termsOfService": " Terms of service ",
 			"userName": "Username",
-			"signInFormDescription": "Enter your username to login to your account",
+			"signInFormDescription": "Enter your email to login to your account",
 			"noAccount": "Don't have an account?"
 		},
 		"nav": {

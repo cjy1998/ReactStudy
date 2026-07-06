@@ -9,6 +9,8 @@ interface ImportMetaEnv {
 	readonly VITE_APP_API_BASE_URL: string;
 	/** Routing mode: frontend routing or backend routing */
 	readonly VITE_APP_ROUTER_MODE: "frontend" | "backend";
+	/** Whether to enable local mock (msw). "true" | "false" */
+	readonly VITE_APP_ENABLE_MOCK: string;
 }
 
 interface ImportMeta {
