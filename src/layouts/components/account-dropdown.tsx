@@ -1,8 +1,14 @@
 import { useLoginStateContext } from "@/pages/sys/login/providers/login-provider";
 import { useRouter } from "@/routes/hooks";
-import { useUserActions, useUserInfo } from "@/store/userStore";
+import { useLogout, useUserInfo } from "@/store/userStore";
 import { Button } from "@/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/ui/dropdown-menu";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/ui/dropdown-menu";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router";
 
@@ -12,12 +18,12 @@ import { NavLink } from "react-router";
 export default function AccountDropdown() {
 	const { replace } = useRouter();
 	const { username, email, avatar } = useUserInfo();
-	const { clearUserInfoAndToken } = useUserActions();
+	const logout = useLogout();
 	const { backToLogin } = useLoginStateContext();
 	const { t } = useTranslation();
-	const logout = () => {
+	const handleLogout = async () => {
 		try {
-			clearUserInfoAndToken();
+			await logout();
 			backToLogin();
 		} catch (error) {
 			console.log(error);
@@ -54,7 +60,7 @@ export default function AccountDropdown() {
 					<NavLink to="/management/user/account">{t("sys.nav.user.account")}</NavLink>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem className="font-bold text-warning" onClick={logout}>
+				<DropdownMenuItem className="font-bold text-warning" onClick={handleLogout}>
 					{t("sys.login.logout")}
 				</DropdownMenuItem>
 			</DropdownMenuContent>

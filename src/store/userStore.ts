@@ -77,4 +77,31 @@ export const useSignIn = () => {
 	return signIn;
 };
 
+export const useLogout = () => {
+	const { clearUserInfoAndToken } = useUserActions();
+
+	const logoutMutation = useMutation({
+		mutationFn: userService.logout,
+	});
+
+	const logout = async () => {
+		const { refreshToken } = useUserStore.getState().userToken;
+		try {
+			if (refreshToken) {
+				await logoutMutation.mutateAsync({ refreshToken });
+			}
+		} catch (err) {
+			toast.error(err.message, {
+				position: "top-center",
+			});
+			throw err;
+		} finally {
+			// 无论接口成功与否,都清掉本地登录态
+			clearUserInfoAndToken();
+		}
+	};
+
+	return logout;
+};
+
 export default useUserStore;
