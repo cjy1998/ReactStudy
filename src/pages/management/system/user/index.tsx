@@ -6,21 +6,47 @@ import { Button } from "@/ui/button";
 import { Card, CardContent, CardHeader } from "@/ui/card";
 import { Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import type { Role_Old, UserInfo } from "#/entity";
+import type { UserInfo } from "#/entity";
 import { BasicStatus } from "#/enum";
-
-// TODO: fix
-// const USERS: UserInfo[] = USER_LIST as UserInfo[];
-const USERS: UserInfo[] = [];
+import userService from "@/api/services/userService";
+import { useEffect, useState } from "react";
 
 export default function UserPage() {
 	const { push } = useRouter();
 	const pathname = usePathname();
+	const [users, setUsers] = useState<UserInfo[]>([]);
+	const [page, setPage] = useState(1);
+	const [pageSize, setPageSize] = useState(10);
+	const [loading, setLoading] = useState(false);
+
+	const fetchUsers = async () => {
+		setLoading(true);
+		try {
+			const { items, page: page_num, page_size, total } = await userService.getUsers(page, pageSize);
+			setUsers(items);
+			setPage(page_num);
+			setPageSize(page_size);
+		} catch (error) {
+			console.error(error);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	const handlePageChange = (page: number, pageSize: number) => {
+		setPage(page);
+		setPageSize(pageSize);
+		fetchUsers();
+	};
+
+	useEffect(() => {
+		fetchUsers();
+	}, [page, pageSize]);
 
 	const columns: ColumnsType<UserInfo> = [
 		{
 			title: "Name",
-			dataIndex: "name",
+			dataIndex: "username",
 			width: 300,
 			render: (_, record) => {
 				return (
@@ -36,17 +62,28 @@ export default function UserPage() {
 		},
 		{
 			title: "Role",
-			dataIndex: "role",
+			dataIndex: "roles",
 			align: "center",
 			width: 120,
-			render: (role: Role_Old) => <Badge variant="info">{role.name}</Badge>,
+			render: (_, record) => {
+				const role = record.roles?.[0];
+				return role ? (
+					<Badge variant="info">{role.name}</Badge>
+				) : (
+					<span className="text-text-secondary text-xs">—</span>
+				);
+			},
 		},
 		{
 			title: "Status",
 			dataIndex: "status",
 			align: "center",
 			width: 120,
-			render: (status) => <Badge variant={status === BasicStatus.DISABLE ? "error" : "success"}>{status === BasicStatus.DISABLE ? "Disable" : "Enable"}</Badge>,
+			render: (status) => (
+				<Badge variant={status === BasicStatus.DISABLE ? "error" : "success"}>
+					{status === BasicStatus.DISABLE ? "Disable" : "Enable"}
+				</Badge>
+			),
 		},
 		{
 			title: "Action",
@@ -84,7 +121,14 @@ export default function UserPage() {
 				</div>
 			</CardHeader>
 			<CardContent>
-				<Table rowKey="id" size="small" scroll={{ x: "max-content" }} pagination={false} columns={columns} dataSource={USERS} />
+				<Table
+					rowKey="id"
+					size="small"
+					scroll={{ x: "max-content" }}
+					pagination={false}
+					columns={columns}
+					dataSource={users}
+				/>
 			</CardContent>
 		</Card>
 	);

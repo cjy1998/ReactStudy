@@ -1,4 +1,5 @@
-import type { UserInfo, UserToken } from "#/entity";
+import type { User, UserInfo, UserToken } from "#/entity";
+import type { Page } from "#/api";
 import apiClient from "../apiClient";
 
 export interface SignInReq {
@@ -18,7 +19,7 @@ export enum UserApi {
 	SignUp = "/auth/signup",
 	Logout = "/auth/logout",
 	Refresh = "/auth/refresh",
-	User = "/user",
+	User = "/users",
 }
 
 const signin = (data: SignInReq) => apiClient.post<SignInRes>({ url: UserApi.SignIn, data });
@@ -29,10 +30,14 @@ export interface LogoutReq {
 
 const logout = (data: LogoutReq) => apiClient.post({ url: UserApi.Logout, data });
 const findById = (id: string) => apiClient.get<UserInfo[]>({ url: `${UserApi.User}/${id}` });
-
+const getUsers = (page: number, pageSize: number) =>
+	apiClient.get<Page<User>>({
+		url: `${UserApi.User}?page=${page}&page_size=${pageSize}`,
+	});
 export default {
 	signin,
 	signup,
 	findById,
 	logout,
+	getUsers,
 };
